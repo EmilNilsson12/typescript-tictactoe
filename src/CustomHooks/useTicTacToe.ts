@@ -16,9 +16,6 @@ export default (): ReturnValue => {
 	const [gameStatus, setGameStatus] = useState('created');
 	const [players, setPlayers] = useState(['', '']);
 
-	const [gameOver, setGameOver] = useState({});
-	setGameOver(true);
-
 	useEffect(() => {
 		if (gameStatus !== 'started') return;
 
@@ -27,7 +24,7 @@ export default (): ReturnValue => {
 			[3, 4, 5],
 			[6, 7, 8],
 			[0, 3, 6],
-			[1, 3, 7],
+			[1, 4, 7],
 			[2, 5, 8],
 			[0, 3, 8],
 			[2, 4, 6],
@@ -71,13 +68,13 @@ export default (): ReturnValue => {
 		setTurn(newTurn);
 	};
 
-	const handleStart = (players: string[]) => {
+	const handleStart = (players: string[]): void => {
 		setPlayers(players);
 		setTurn('X');
 		setGameStatus('started');
 	};
 
-	const handleRestart = () => {
+	const handleRestart = (): void => {
 		setBoard(Array(9).fill(''));
 		setWinner('');
 		setGameStatus('created');
