@@ -2,61 +2,35 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class User {
-	constructor(firstName: string, lastName: string, email: string) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-	}
-	firstName: string;
-	lastName: string;
-	email: string;
+// Base / Parent Class
+class Animal {
+	age: number;
+	legs: number;
+	name: string;
 
-	get fullName(): string {
-		return `${this.firstName} ${this.lastName}`;
-	}
-
-	doesEmailMatch(email: string): boolean {
-		return this.email === email;
+	constructor(age: number, legs: number, name: string) {
+		this.age = age;
+		this.legs = legs;
+		this.name = name;
 	}
 }
 
-export class Message {
-	constructor(title: string, message: string) {
-		this.title = title;
-		this.message = message;
-		// this._isSent = false;
-		this.deliveryDate = new Date();
-	}
-
-	title: string;
-	message: string;
-	deliveryDate: Date;
-
-	private _isSent: boolean;
-	set isSent(value: boolean) {
-		if (value === true) {
-			this.deliveryDate = new Date();
-		}
-		this._isSent = value;
-	}
-	get isSent(): boolean {
-		return this._isSent;
-	}
-
-	get messageStatus(): string {
-		const sentMessage = this.isSent ? 'Has been sent' : 'Has not been sent';
-
-		return `${this.message} | ${sentMessage}`;
-	}
-
-	previewMessage(): string {
-		return this.message.slice(0, 10).concat('...');
+// Derived / Child Class
+class Dog extends Animal {
+	woof(): string {
+		return 'WOOF! WOOF! WOOF!';
 	}
 }
 
-const message = new Message('Hello', 'WorldWorldWorld');
-const message2 = new Message('World2', 'HelloHelloHello');
+// Derived / Child Class
+class Cat extends Animal {
+	meow(): string {
+		return 'meow! meow! meow!';
+	}
+}
+
+const myDog = new Dog(2, 4, 'Baba');
+const myCat = new Cat(2, 4, 'Keke');
 
 function App() {
 	return (
@@ -64,16 +38,11 @@ function App() {
 			<header className='App-header'>
 				<img src={logo} className='App-logo' alt='logo' />
 				<p>
-					Edit <code>src/App.tsx</code> and save to reload.
+					Hunden <em>{myDog.name}</em> säger "{myDog.woof()}"
 				</p>
-				<div>
-					{message.title}: {message.previewMessage()} <br />{' '}
-					{message.messageStatus}
-				</div>
-				<div>
-					{message2.title}: {message2.previewMessage()} <br />{' '}
-					{message2.messageStatus}
-				</div>
+				<p>
+					Katten <em>{myCat.name}</em> säger "{myCat.meow()}"
+				</p>
 			</header>
 		</div>
 	);
