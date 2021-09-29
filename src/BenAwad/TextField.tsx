@@ -14,7 +14,7 @@ interface Props {
 		property1: string;
 		property2: string;
 	};
-	person: Person;
+	person?: Person;
 }
 
 const TextField: React.FC<Props> = (props: Props) => {
@@ -23,7 +23,7 @@ const TextField: React.FC<Props> = (props: Props) => {
 			<h1>TextField component</h1>
 			user:{' '}
 			<em>
-				{props.person.firstName} {props.person.lastName}
+				{props.person?.firstName} {props.person?.lastName}
 			</em>{' '}
 			is logged in
 			<input value={props.text} />
