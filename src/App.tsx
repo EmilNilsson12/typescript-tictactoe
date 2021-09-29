@@ -12,9 +12,16 @@ export class Message {
 		this.message = message;
 		this.isSent = false;
 	}
+
+	previewMessage(): string {
+		return this.message.slice(0, 10).concat('...');
+	}
 }
 
-const message = new Message('Hello', 'World');
+const message = new Message(
+	'Hello',
+	'WdorldWorldWorldWorldWorldWorldWorldWorldWorldWorldWorldWorld'
+);
 
 function App() {
 	const message1 = { title: undefined, message: undefined };
@@ -29,7 +36,7 @@ function App() {
 					Edit <code>src/App.tsx</code> and save to reload.
 				</p>
 				<div>
-					{message.title}: {message.message}
+					{message.title}: {message.previewMessage()}
 				</div>
 				<div>
 					{message1.title}: {message1.message}
