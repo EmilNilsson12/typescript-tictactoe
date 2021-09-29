@@ -23,7 +23,10 @@ function App() {
 				<Finished name={winner} handleRestart={handleRestart} />
 			)}
 
-			<TextField text='Hello from parent-component' />
+			<TextField
+				text='Hello from parent-component'
+				person={{ firstName: 'Janne', lastName: 'Kemi' }}
+			/>
 		</div>
 	);
 }
