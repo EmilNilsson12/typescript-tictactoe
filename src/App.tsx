@@ -5,6 +5,7 @@ import Start from './Components/Start';
 import Finished from './Components/Finished';
 
 import useTicTacToe from './CustomHooks/useTicTacToe';
+import TextField from './BenAwad/TextField';
 
 function App() {
 	const { board, gameStatus, winner, handleClick, handleRestart, handleStart } =
@@ -21,6 +22,8 @@ function App() {
 			{gameStatus === 'finished' && (
 				<Finished name={winner} handleRestart={handleRestart} />
 			)}
+
+			<TextField text='Hello from parent-component' />
 		</div>
 	);
 }
