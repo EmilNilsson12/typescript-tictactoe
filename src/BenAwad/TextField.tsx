@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Interface } from 'readline';
+import React, { useEffect, useState, useRef } from 'react';
 
 interface Person {
 	firstName: string;
@@ -16,15 +15,15 @@ interface Props {
 		property2: string;
 	};
 	person?: Person;
+	handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface TextNode {
 	text: string;
 }
 
-const TextField: React.FC<Props> = (props: Props) => {
+const TextField: React.FC<Props> = ({ handleChange, person, text }) => {
 	const [count, setCount] = useState<number | null | undefined | string>(5);
-
 	const [myText, setMyText] = useState<TextNode>({ text: '5' });
 
 	useEffect(() => {
@@ -32,15 +31,18 @@ const TextField: React.FC<Props> = (props: Props) => {
 		setMyText({ text: 't' });
 	}, []);
 
+	const inputRef = useRef<HTMLInputElement>(null);
+	const divRef = useRef<HTMLDivElement>(null);
+
 	return (
-		<div>
+		<div ref={divRef}>
 			<h1>TextField component</h1>
 			user:{' '}
 			<em>
-				{props.person?.firstName} {props.person?.lastName}
+				{person?.firstName} {person?.lastName}
 			</em>{' '}
 			is logged in
-			<input value={props.text} />
+			<input value={text} ref={inputRef} onChange={handleChange} />
 		</div>
 	);
 };
