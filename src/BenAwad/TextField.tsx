@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Interface } from 'readline';
 
 interface Person {
 	firstName: string;
@@ -17,7 +18,20 @@ interface Props {
 	person?: Person;
 }
 
+interface TextNode {
+	text: string;
+}
+
 const TextField: React.FC<Props> = (props: Props) => {
+	const [count, setCount] = useState<number | null | undefined | string>(5);
+
+	const [myText, setMyText] = useState<TextNode>({ text: '5' });
+
+	useEffect(() => {
+		setCount(3);
+		setMyText({ text: 't' });
+	}, []);
+
 	return (
 		<div>
 			<h1>TextField component</h1>
