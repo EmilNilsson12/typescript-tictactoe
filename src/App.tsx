@@ -2,15 +2,52 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-export class Message {
-	title: string;
-	message: string;
-	isSent: boolean;
+class User {
+	constructor(firstName: string, lastName: string, email: string) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+	firstName: string;
+	lastName: string;
+	email: string;
 
+	get fullName(): string {
+		return `${this.firstName} ${this.lastName}`;
+	}
+
+	doesEmailMatch(email: string): boolean {
+		return this.email === email;
+	}
+}
+
+export class Message {
 	constructor(title: string, message: string) {
 		this.title = title;
 		this.message = message;
-		this.isSent = false;
+		// this._isSent = false;
+		this.deliveryDate = new Date();
+	}
+
+	title: string;
+	message: string;
+	deliveryDate: Date;
+
+	private _isSent: boolean;
+	set isSent(value: boolean) {
+		if (value === true) {
+			this.deliveryDate = new Date();
+		}
+		this._isSent = value;
+	}
+	get isSent(): boolean {
+		return this._isSent;
+	}
+
+	get messageStatus(): string {
+		const sentMessage = this.isSent ? 'Has been sent' : 'Has not been sent';
+
+		return `${this.message} | ${sentMessage}`;
 	}
 
 	previewMessage(): string {
@@ -18,16 +55,10 @@ export class Message {
 	}
 }
 
-const message = new Message(
-	'Hello',
-	'WdorldWorldWorldWorldWorldWorldWorldWorldWorldWorldWorldWorld'
-);
+const message = new Message('Hello', 'WorldWorldWorld');
+const message2 = new Message('World2', 'HelloHelloHello');
 
 function App() {
-	const message1 = { title: undefined, message: undefined };
-	const message2 = { title: undefined, message: undefined };
-	const message3 = { title: undefined, message: undefined };
-
 	return (
 		<div className='App'>
 			<header className='App-header'>
@@ -36,16 +67,12 @@ function App() {
 					Edit <code>src/App.tsx</code> and save to reload.
 				</p>
 				<div>
-					{message.title}: {message.previewMessage()}
+					{message.title}: {message.previewMessage()} <br />{' '}
+					{message.messageStatus}
 				</div>
 				<div>
-					{message1.title}: {message1.message}
-				</div>
-				<div>
-					{message2.title}: {message2.message}
-				</div>
-				<div>
-					{message3.title}: {message3.message}
+					{message2.title}: {message2.previewMessage()} <br />{' '}
+					{message2.messageStatus}
 				</div>
 			</header>
 		</div>
