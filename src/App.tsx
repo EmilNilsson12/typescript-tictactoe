@@ -1,51 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Month from './Components/Month';
 
-// Base / Parent Class
-class Animal {
-	age: number;
-	legs: number;
-	name: string;
+interface Props {}
 
-	constructor(age: number, legs: number, name: string) {
-		this.age = age;
-		this.legs = legs;
-		this.name = name;
+interface State {}
+
+class App extends Component<Props, State> {
+	state = {
+		events: [
+			{ deadline: '2021-10-12', todo: 'Do stuff' },
+			{ deadline: '2021-10-18', todo: 'Do stuff' },
+			{ deadline: '2021-01-12', todo: 'Do stuff' },
+			{ deadline: '2021-10-12', todo: 'Do stuff' },
+			{ deadline: '2021-12-02', todo: 'Do stuff' },
+			{ deadline: '2021-04-12', todo: 'Do stuff' },
+			{ deadline: '2021-07-11', todo: 'Do stuff' },
+		],
+	};
+	render() {
+		return (
+			<div className='App'>
+				<header className='App-header'>
+					<Month events={this.state.events} />
+				</header>
+			</div>
+		);
 	}
-}
-
-// Derived / Child Class
-class Dog extends Animal {
-	woof(): string {
-		return 'WOOF! WOOF! WOOF!';
-	}
-}
-
-// Derived / Child Class
-class Cat extends Animal {
-	meow(): string {
-		return 'meow! meow! meow!';
-	}
-}
-
-const myDog = new Dog(2, 4, 'Baba');
-const myCat = new Cat(2, 4, 'Keke');
-
-function App() {
-	return (
-		<div className='App'>
-			<header className='App-header'>
-				<img src={logo} className='App-logo' alt='logo' />
-				<p>
-					Hunden <em>{myDog.name}</em> säger "{myDog.woof()}"
-				</p>
-				<p>
-					Katten <em>{myCat.name}</em> säger "{myCat.meow()}"
-				</p>
-			</header>
-		</div>
-	);
 }
 
 export default App;
